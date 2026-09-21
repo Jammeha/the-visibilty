@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root { color-scheme: light; }
+
+@theme inline {
+  --font-sans: 'Inter', 'Arial', sans-serif;
+  --color-background: #ffffff;
+  --color-foreground: #071b49;
+  --color-border: #dce6f2;
+  --color-ring: #1687ff;
+  --color-navy: #061b4b;
+  --color-blue: #1687ff;
+  --color-blue-light: #48b2ff;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: #fff;
+    font-family: 'Inter', Arial, 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
+  a { transition: color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease; }
+  ::selection { background: #1687ff; color: #fff; }
+  * { cursor: none !important; }
+}
+
+/* ─── Typography ─────────────────────────────────────────────── */
+.eyebrow {
+  color: #1687ff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.eyebrow-light {
+  color: rgba(147, 197, 253, 0.85);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.footer-label {
+  color: #48b2ff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+/* ─── Hero ───────────────────────────────────────────────────── */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
+    radial-gradient(circle at 78% 28%, rgba(22,135,255,.22), transparent 30%),
+    linear-gradient(135deg, #061b4b 0%, #0a2d6b 100%);
+  background-size: 60px 60px, 60px 60px, auto, auto;
+}
+.hero-orbit {
+  position: absolute;
+  border: 1px solid rgba(72,178,255,.25);
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: rotate(-28deg);
+  animation: drift 16s ease-in-out infinite alternate;
+}
+.orbit-one { width: 90vw; height: 34vw; right: -16vw; top: 17%; box-shadow: 0 0 80px rgba(22,135,255,.12); }
+.orbit-two { width: 78vw; height: 28vw; right: -7vw; top: 26%; border-color: rgba(72,178,255,.14); animation-duration: 20s; }
+.orbit-three { width: 62vw; height: 20vw; right: 3vw; top: 35%; border-color: rgba(72,178,255,.1); animation-duration: 24s; }
+
+/* ─── Noise grain overlay ────────────────────────────────────── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+/* ─── Marquee ────────────────────────────────────────────────── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─── Contact form ───────────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #667892;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1px solid #dce6f2;
+  border-radius: 12px;
+  background: #f8fbff;
+  padding: 14px 16px;
+  color: #071b49;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  outline: none;
+  text-transform: none;
+  font-family: inherit;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #1687ff;
+  box-shadow: 0 0 0 3px rgba(22,135,255,.12);
+}
+.field textarea { resize: vertical; }
+
+/* ─── Contact glow ───────────────────────────────────────────── */
+.contact-glow {
+  position: absolute;
+  width: 52rem;
+  height: 52rem;
+  right: -16rem;
+  top: -22rem;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 60px rgba(255,255,255,.025),
+    0 0 0 120px rgba(255,255,255,.015);
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes drift {
+  from { transform: rotate(-28deg) translate3d(-1%,-1%,0); }
+  to   { transform: rotate(-25deg) translate3d(2%,2%,0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-orbit, .marquee-track { animation: none; }
+}
+@media (max-width: 640px) {
+  .orbit-one { width: 160vw; height: 65vw; right: -55vw; top: 30%; }
+  .orbit-two, .orbit-three { display: none; }
+}
