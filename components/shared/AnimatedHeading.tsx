@@ -26,7 +26,7 @@ export default function AnimatedHeading({ children, className = '', delay = 0, a
             animate={inView ? { y: 0, opacity: 1 } : {}}
             transition={{
               duration: 0.7,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [0.22, 1, 0.36, 1] as const,
               delay: delay + i * 0.065,
             }}
           >
